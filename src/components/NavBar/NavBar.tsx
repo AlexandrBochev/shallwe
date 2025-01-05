@@ -19,9 +19,9 @@ const NavBar = async () => {
           <div className="flex items-center">
             <Link
               href="/"
-              className="text-xl font-bold text-primary tracking-wider"
+              className="text-xl font-semibold text-primary tracking-wider"
             >
-              {MAIN_LAYOUT.METADATA.title}
+              &#129335; {MAIN_LAYOUT.METADATA.title}
             </Link>
           </div>
 

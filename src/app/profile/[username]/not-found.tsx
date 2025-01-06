@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { MAIN_LAYOUT, PROFILE } from '@/lib/constants'
-import { ArrowLeftIcon, HomeIcon } from 'lucide-react'
+import { HomeIcon } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 

@@ -2,8 +2,7 @@
 
 import { prisma } from "@/lib/prisma"
 import { getDbUserId } from "./user.action"
-import { MAIN_LAYOUT, NOTIFICATIONS } from "@/lib/constants"
-import { revalidatePath, revalidateTag } from "next/cache";
+import { NOTIFICATIONS } from "@/lib/constants"
 
 export const getNotifications = async () => {
   try {

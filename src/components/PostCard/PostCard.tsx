@@ -23,6 +23,7 @@ import { Textarea } from "../ui/textarea";
 import { Card, CardContent } from "../ui/card";
 import { MAIN_LAYOUT, POST } from "@/lib/constants";
 import { DeleteAlertDialog } from "../DeleteAlertDialog/DeleteAlertDialog";
+import Image from "next/image";
 
 type Posts = Awaited<ReturnType<typeof getPosts>>;
 type Post = Posts[number];
@@ -51,6 +52,7 @@ function PostCard({ post, dbUserId }: PostCardProps) {
       setOptmisticLikes((prev) => prev + (hasLiked ? -1 : 1));
       await toggleLike(post.id);
     } catch (error) {
+      console.error(error);
       setOptmisticLikes(post._count.likes);
       setHasLiked(post.likes.some((like) => like.userId === dbUserId));
     } finally {
@@ -68,6 +70,7 @@ function PostCard({ post, dbUserId }: PostCardProps) {
         setNewComment("");
       }
     } catch (error) {
+      console.error(error);
       toast.error(POST.POST_CARD.failedToAddComment);
     } finally {
       setIsCommenting(false);
@@ -82,6 +85,7 @@ function PostCard({ post, dbUserId }: PostCardProps) {
       if (result.success) toast.success(POST.POST_CARD.postDeleted);
       else throw new Error(result.error);
     } catch (error) {
+      console.error(error);
       toast.error(POST.POST_CARD.failedToDeletePost);
     } finally {
       setIsDeleting(false);
@@ -143,9 +147,12 @@ function PostCard({ post, dbUserId }: PostCardProps) {
           {/* POST IMAGE */}
           {post.image && (
             <div className="rounded-lg overflow-hidden">
-              <img
+              <Image
                 src={post.image}
                 alt="Post content"
+                width={500}
+                height={500}
+                priority
                 className="w-full h-auto object-cover"
               />
             </div>

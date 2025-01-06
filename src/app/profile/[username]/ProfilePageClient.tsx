@@ -67,6 +67,7 @@ const ProfilePageClient = ({
       await toggleFollow(user.id);
       setIsFollowing(!isFollowing);
     } catch (error) {
+      console.error(error);
       toast.error(PROFILE.FAILED_TO_UPDATE_FOLLOW_STATUS);
     } finally {
       setIsUpdatingFollow(false);

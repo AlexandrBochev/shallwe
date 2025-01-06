@@ -14,6 +14,7 @@ import { formatDistanceToNow } from "date-fns";
 import { HeartIcon, MessageCircleIcon, UserPlusIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import Image from "next/image";
 
 type Notifications = Awaited<Return<typeof getNotifications>>;
 type Notification = Notifications[number];
@@ -40,11 +41,13 @@ const NotificationsPage = () => {
       setIsLoading(true);
       try {
         const data = await getNotifications();
+        if (!data) throw new Error(NOTIFICATIONS.GET_NOTIFICATIONS.failedToFetchNotifications);
         setNotifications(data);
 
         const unreadIds = data.filter((n) => !n.read).map((n) => n.id);
         if (unreadIds.length) await markNotificationsAsRead(unreadIds);
       } catch (error) {
+        console.error(error);
         toast.error(NOTIFICATIONS.GET_NOTIFICATIONS.failedToFetchNotifications);
       } finally {
         setIsLoading(false);
@@ -111,9 +114,12 @@ const NotificationsPage = () => {
                           <div className="text-sm text-muted-foreground rounded-md p-2 bg-muted/30 mt-2">
                             <p>{notification.post.content}</p>
                             {notification.post.image && (
-                              <img
+                              <Image
                                 src={notification.post.image}
                                 alt={NOTIFICATIONS.POST_CONTENT}
+                                width={300}
+                                height={300}
+                                priority
                                 className="mt-2 rounded-md w-full max-w-[200px] h-auto object-cover"
                               />
                             )}

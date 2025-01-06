@@ -1,7 +1,7 @@
 export const MAIN_LAYOUT = {
   METADATA: {
-    title: "Shall We",
-    description: "Shall We | sociality for all",
+    title: "ShallWe",
+    description: "ShallWe | sociality for all",
   },
   NAVBAR: {
     home: {
